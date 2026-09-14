@@ -1,11 +1,11 @@
 [
   {
-    "accion": "Encender luces de sala",
-    "descripcion": "Enciende las luces de la sala a intensidad media de forma gradual.",
-    "naturaleza": "Automatización",
-    "skillAlexa": "Rutina Sala",
-    "materiales": ["Amazon Echo", "Foco inteligente"],
-    "link": "#"
+    "accion": "Tortura Fisica",
+    "descripcion": "Tortura con azotes, sondas varias, plugs varios.",
+    "naturaleza": "Tortura",
+    "skillAlexa": "Como lo castigamos",
+    "materiales": ["spank", "latigo", "sonda vidrio", "sonda castigo", "sondas chicas", "sondas grandes", "sonda uretral", "plug inflable", "cuerda", "plug de cadena", "sonda para boca", "sonda nasogástrica", "el palo para el culo"],
+    "link": "https://www.virtualsmarthome.xyz/url_routine_trigger/activate.php?trigger=976d7bc6-9099-431f-bded-f0dee35cb9c7&token=3da3bff1-7a68-418b-9ef0-b8e908793932&response=json"
   },
   {
     "accion": "Modo cine",

@@ -1,0 +1,26 @@
+[
+  {
+    "accion": "Encender luces de sala",
+    "descripcion": "Enciende las luces de la sala a intensidad media de forma gradual.",
+    "naturaleza": "Automatización",
+    "skillAlexa": "Rutina Sala",
+    "materiales": ["Amazon Echo", "Foco inteligente"],
+    "link": "#"
+  },
+  {
+    "accion": "Modo cine",
+    "descripcion": "Apaga las luces principales, baja la intensidad a 20% y enciende el proyector.",
+    "naturaleza": "Escena",
+    "skillAlexa": "Rutina Cine",
+    "materiales": ["Amazon Echo", "Focos inteligentes", "Proyector", "Control remoto"],
+    "link": "#"
+  },
+  {
+    "accion": "Regar plantas",
+    "descripcion": "Activa la válvula del sistema de riego por 5 minutos en la zona de macetas.",
+    "naturaleza": "Riego",
+    "skillAlexa": "Rutina Riego",
+    "materiales": ["Amazon Echo", "Válvula inteligente", "Manguera con conectores"],
+    "link": "#"
+  }
+]

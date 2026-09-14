@@ -180,13 +180,14 @@ function seleccionar(i){
     detalleEl.appendChild(v);
   }
 
-  if(a.materiales && a.materiales.length){
+  const mats = (a.materiales || []).filter(m=> m && String(m).trim() !== "");
+  if(mats.length){
     const k = document.createElement("div");
     k.className = "k";
     k.textContent = "Materiales necesarios";
     const chips = document.createElement("div");
     chips.className = "chips";
-    a.materiales.forEach(m=>{
+    mats.forEach(m=>{
       const chip = document.createElement("span");
       chip.className = "chip";
       chip.textContent = m;

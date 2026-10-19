@@ -91,6 +91,22 @@
     color: var(--bg); background: linear-gradient(90deg, var(--coral), var(--teal));
   }
   #btnIr:disabled{ opacity:.45; cursor:default; }
+  #btnAbrir{
+    margin-top:10px; width:100%; padding:12px; border-radius:12px;
+    background:transparent; color: var(--fg-muted);
+    border:1px solid var(--card-border);
+    font-family:'Inter', sans-serif; font-size:.85rem; cursor:pointer;
+  }
+  #btnAbrir:active{ transform: scale(.98); }
+  .estado{
+    display:none; margin-top:14px; padding:12px 14px; border-radius:12px;
+    font-size:.85rem; line-height:1.45;
+    background: var(--bg-2); border:1px solid var(--card-border); color: var(--fg);
+  }
+  .estado.visible{ display:block; }
+  .estado.busy{ border-color: var(--teal); background: rgba(47,217,199,.1); color: var(--teal); }
+  .estado.ok{ border-color: var(--verde); background: rgba(109,255,160,.1); color: var(--verde); }
+  .estado.err{ border-color: var(--coral); background: rgba(255,106,92,.1); color: var(--coral); }
   @media (max-width: 680px){
     #panel{ grid-template-columns: 1fr; }
   }
@@ -203,15 +219,44 @@ function seleccionar(i){
   const btn = document.createElement("button");
   btn.id = "btnIr";
   btn.disabled = !a.link || a.link === "#";
-  btn.textContent = (a.link && a.link !== "#") ? "Ir a la rutina" : "Sin enlace asignado";
-  btn.onclick = ()=>{
-    window.open(a.link, "_blank", "noopener");
-  };
+  btn.textContent = (a.link && a.link !== "#") ? "Enviar rutina" : "Sin enlace asignado";
   detalleEl.appendChild(btn);
+
+  const estado = document.createElement("div");
+  estado.className = "estado";
+  estado.id = "estado";
+  detalleEl.appendChild(estado);
+
+  const abrir = document.createElement("button");
+  abrir.id = "btnAbrir";
+  abrir.textContent = "Abrir en navegador";
+  abrir.onclick = ()=> window.open(a.link, "_blank", "noopener");
+  detalleEl.appendChild(abrir);
+
+  btn.onclick = ()=> enviar(a, btn, estado);
 
   detalleEl.style.display = "block";
   if(window.innerWidth <= 680){
     detalleEl.scrollIntoView({ behavior:"smooth", block:"start" });
+  }
+}
+
+async function enviar(a, btn, estado){
+  const previo = btn.textContent;
+  btn.disabled = true;
+  estado.className = "estado visible busy";
+  estado.textContent = "Enviando rutina a Alexa...";
+
+  try{
+    await fetch(a.link, { mode:"no-cors", cache:"no-store" });
+    estado.className = "estado visible ok";
+    estado.textContent = "Rutina enviada. La app no puede leer la respuesta (el servidor no permite CORS), pero la peticion si se ejecuto. Usa 'Abrir en navegador' si necesitas ver el JSON.";
+    btn.textContent = "Enviada";
+  }catch(e){
+    estado.className = "estado visible err";
+    estado.textContent = "No se pudo enviar: " + e.message;
+    btn.textContent = previo;
+    btn.disabled = false;
   }
 }
 

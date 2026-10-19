@@ -91,13 +91,6 @@
     color: var(--bg); background: linear-gradient(90deg, var(--coral), var(--teal));
   }
   #btnIr:disabled{ opacity:.45; cursor:default; }
-  #btnAbrir{
-    margin-top:10px; width:100%; padding:12px; border-radius:12px;
-    background:transparent; color: var(--fg-muted);
-    border:1px solid var(--card-border);
-    font-family:'Inter', sans-serif; font-size:.85rem; cursor:pointer;
-  }
-  #btnAbrir:active{ transform: scale(.98); }
   .estado{
     display:none; margin-top:14px; padding:12px 14px; border-radius:12px;
     font-size:.85rem; line-height:1.45;
@@ -227,12 +220,6 @@ function seleccionar(i){
   estado.id = "estado";
   detalleEl.appendChild(estado);
 
-  const abrir = document.createElement("button");
-  abrir.id = "btnAbrir";
-  abrir.textContent = "Abrir en navegador";
-  abrir.onclick = ()=> window.open(a.link, "_blank", "noopener");
-  detalleEl.appendChild(abrir);
-
   btn.onclick = ()=> enviar(a, btn, estado);
 
   detalleEl.style.display = "block";
@@ -250,8 +237,9 @@ async function enviar(a, btn, estado){
   try{
     await fetch(a.link, { mode:"no-cors", cache:"no-store" });
     estado.className = "estado visible ok";
-    estado.textContent = "Rutina enviada. La app no puede leer la respuesta (el servidor no permite CORS), pero la peticion si se ejecuto. Usa 'Abrir en navegador' si necesitas ver el JSON.";
-    btn.textContent = "Enviada";
+    estado.textContent = "Rutina enviada. La app no puede leer la respuesta (el servidor no permite CORS), pero la peticion si se ejecuto. Puedes volver a enviarla cuando quieras.";
+    btn.textContent = "Enviar de nuevo";
+    btn.disabled = false;
   }catch(e){
     estado.className = "estado visible err";
     estado.textContent = "No se pudo enviar: " + e.message;
